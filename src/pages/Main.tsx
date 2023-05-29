@@ -1,6 +1,8 @@
 import { Item } from '../models/item.model';
 import { Box } from '../models/box.model';
 import Boxes from '../components/Boxes';
+import SearchBox from '../components/SearchBox';
+import AddBoxButton from '../components/AddBoxButton';
 import { useState } from 'react';
 
 type Props = {};
@@ -35,7 +37,21 @@ const DUMMY_BOXES: Box[] = [
 export default function MainPage({}: Props) {
   const [boxes, setBoxes] = useState(DUMMY_BOXES);
 
-  return <div className="flex flex-col items-center">
-    <Boxes boxes={ boxes } />
-  </div>;
+  const searchHandler = (key: string) => {
+    setBoxes(
+      DUMMY_BOXES.filter(
+        (b) => b.label.toLowerCase().indexOf(key.trim().toLowerCase()) > -1
+      )
+    );
+  };
+
+  return (
+    <div className="flex flex-col items-center gap-6">
+      <div className="flex flex-col lg:flex-row gap-4 items-center">
+        <SearchBox searchHandler={searchHandler} />
+        <AddBoxButton />
+      </div>
+      <Boxes boxes={boxes} />
+    </div>
+  );
 }

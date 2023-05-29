@@ -18,6 +18,7 @@ module.exports = {
       gray: colors.gray,
       blue: colors.blue,
       emerald: colors.emerald,
+      pink: colors.pink,
       indigo: colors.indigo,
       yellow: colors.yellow,
       orange: colors.orange
@@ -50,6 +51,9 @@ module.exports = {
     'border-orange-700',
     'bg-orange-400',
     'hover:bg-orange-300',
+    'border-pink-700',
+    'bg-pink-400',
+    'hover:bg-pink-300',
   ],
   plugins: [],
 }
