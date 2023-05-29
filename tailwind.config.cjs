@@ -34,6 +34,23 @@ module.exports = {
       xl: '1440px',
     },
   },
+  safelist: [
+    'border-blue-700',
+    'bg-blue-400',
+    'hover:bg-blue-300',
+    'border-emerald-700',
+    'bg-emerald-400',
+    'hover:bg-emerald-300',
+    'border-red-700',
+    'bg-red-400',
+    'hover:bg-red-300',
+    'border-yellow-700',
+    'bg-yellow-400',
+    'hover:bg-yellow-300',
+    'border-orange-700',
+    'bg-orange-400',
+    'hover:bg-orange-300',
+  ],
   plugins: [],
 }
 
