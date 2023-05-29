@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   width="800"
+   height="700"
+   viewBox="0 0 24 21"
+   fill="none"
+   version="1.1"
+   id="svg1071"
+   sodipodi:docname="box-plus.svg"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1075" />
+  <sodipodi:namedview
+     id="namedview1073"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="1.0175"
+     inkscape:cx="400"
+     inkscape:cy="399.0172"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1071" />
+  <path
+     d="M 16.255276,7.7396061 9.110484,11.734639 1.9628212,7.7332371"
+     stroke="#454545"
+     stroke-width="1.67663"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="path1063" />
+  <path
+     d="m 9.1105692,11.734639 v 7.424948"
+     stroke="#454545"
+     stroke-width="1.67663"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="path1065" />
+  <path
+     d="m 8.2587207,3.9610092 c 0.527124,-0.2947456 1.1765727,-0.2947456 1.7036967,0 l 5.6735646,3.1723503 c 0.527124,0.2947456 0.851848,0.8394486 0.851848,1.4289316 V 14.90699 c 0,0.589458 -0.324724,1.134202 -0.851848,1.428972 L 9.9624174,19.50823 c -0.527124,0.29477 -1.1765727,0.29477 -1.7036967,0 L 2.5851986,16.335962 C 2.0580664,16.041192 1.7333504,15.496448 1.7333504,14.90699 V 8.5622911 c 0,-0.589483 0.324716,-1.134186 0.8518482,-1.4289316 z"
+     stroke="#454545"
+     stroke-width="1.67663"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="path1067" />
+  <path
+     d="M 6.1291001,5.5471844 12.517962,9.2596577"
+     stroke="#454545"
+     stroke-width="1.67663"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="path1069" />
+  <path
+     style="fill:none;stroke:#454545;stroke-width:1.63982;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+     d="M 19.653177,1.0614249 V 8.3439801"
+     id="path1834" />
+  <path
+     style="fill:none;stroke:#454545;stroke-width:1.66957;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+     d="m 15.803439,4.6245572 h 7.636363"
+     id="path1836" />
+</svg>
