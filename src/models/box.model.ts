@@ -1,8 +1,22 @@
 import { Item } from "./item.model";
 
-export interface Box {
-  id: string;
+export class Box {
+  items: Item[] = [];
+  parent: Box | null = null;
+
+  constructor(
+    public id: string,
+    public label: string,
+    public color: string,
+    public description?: string
+  ) {}
+}
+
+export interface IBox {
+  id?: string;
   label: string;
   color: string;
-  items: Item[];
+  description?: string;
+  items?: Item[];
+  parent?: Box | null;
 }

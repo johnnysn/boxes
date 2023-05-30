@@ -1,5 +1,6 @@
 import Navbar from './components/Navbar';
 import { Outlet } from 'react-router-dom';
+import BoxesProvider from './context/boxes-context';
 
 export default function App() {
   return (
@@ -8,7 +9,9 @@ export default function App() {
         <Navbar />
       </header>
       <main className='px-2 sm:px-4 lg:px-6 py-4'>
-        <Outlet />
+        <BoxesProvider>
+          <Outlet />
+        </BoxesProvider>
       </main>
     </>
   );
