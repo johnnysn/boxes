@@ -1,13 +1,17 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Box } from '../models/box.model';
 import ItemViewShort from './ItemViewShort';
 import NewItemInput from './NewItemInput';
+import BoxesContextType from '../context/boxes-context.type';
+import { BoxesContext } from '../context/boxes-context';
+import { Item } from '../models/item.model';
 
 type Props = { box: Box };
 
 export default function BoxViewShort({ box }: Props) {
   const [toggleNew, setToggleNew] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { addItem, removeItem } = useContext<BoxesContextType>(BoxesContext);
 
   const addItemHandler = () => {
     setToggleNew(true);
@@ -19,6 +23,11 @@ export default function BoxViewShort({ box }: Props) {
 
   const addedItemHandler = (name: string) => {
     setToggleNew(false);
+    addItem(box.id, { label: name });
+  };
+
+  const removeItemHandler = (item: Item) => {
+    removeItem(box.id, item);
   };
 
   useEffect(() => {
@@ -53,7 +62,7 @@ export default function BoxViewShort({ box }: Props) {
         )}
 
         {box.items.map((item, index) => (
-          <ItemViewShort key={index} item={item} />
+          <ItemViewShort key={index} item={item} onRemoveItem={removeItemHandler} />
         ))}
       </div>
     </div>

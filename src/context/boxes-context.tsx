@@ -1,13 +1,7 @@
 import React, { ReactNode, useState } from "react";
-import BoxesContextType from "./boxes-context.type";
+import BoxesContextType, { initialBoxesContext } from "./boxes-context.type";
 import { Box, IBox } from "../models/box.model";
-
-const initialContext = {
-  boxes: [],
-  addBox: (box: IBox) => {},
-  updateBox: (id: string, box: IBox) => {},
-  removeBox: (id: string) => {},
-};
+import { Item } from "../models/item.model";
 
 const addBox = (boxes: Box[], boxData: IBox): Box[] => {
   const box = new Box("id", boxData.label, boxData.color, boxData.description);
@@ -16,13 +10,16 @@ const addBox = (boxes: Box[], boxData: IBox): Box[] => {
 };
 
 const updateBox = (boxes: Box[], id: string, boxData: IBox): Box[] => {
-  let box = boxes.find((b) => b.id === id);
+  let index = boxes.findIndex((b) => b.id === id);
 
-  if (box) {
-    box.label = boxData.label;
-    box.color = boxData.color;
-    box.description = boxData.description;
-    return [...boxes];
+  if (index >= 0) {
+    const oldBox = boxes[index];
+    const box = new Box(id, boxData.label, boxData.color, boxData.description, [
+      ...oldBox.items,
+    ]);
+    const boxes_new = [...boxes];
+    boxes_new[index] = box;
+    return boxes_new;
   }
 
   return boxes;
@@ -38,11 +35,35 @@ const removeBox = (boxes: Box[], id: string): Box[] => {
   return boxes;
 };
 
+const addItem = (boxes: Box[], id: string, item: Item): Box[] => {
+  let box = boxes.find((b) => b.id === id);
+
+  if (box) {
+    box.addItem(item);
+    return [...boxes];
+  }
+
+  return boxes;
+};
+
+const removeItem = (boxes: Box[], id: string, item: Item): Box[] => {
+  let box = boxes.find((b) => b.id === id);
+
+  if (box) {
+    box.removeItem(item);
+    return [...boxes];
+  }
+
+  return boxes;
+};
+
 export const BoxesContext =
-  React.createContext<BoxesContextType>(initialContext);
+  React.createContext<BoxesContextType>(initialBoxesContext);
 
 const BoxesProvider = ({ children }: { children: ReactNode }) => {
-  const [boxes, setBoxes] = useState<Box[]>([]);
+  const [boxes, setBoxes] = useState<Box[]>([
+    new Box("Id", "Caixa registradora", "red", "", [{ label: "Canetas" }]),
+  ]);
 
   const contextValue: BoxesContextType = {
     boxes: boxes,
@@ -50,6 +71,10 @@ const BoxesProvider = ({ children }: { children: ReactNode }) => {
     updateBox: (id: string, box: IBox) =>
       setBoxes((state) => updateBox(state, id, box)),
     removeBox: (id: string) => setBoxes((state) => removeBox(state, id)),
+    addItem: (id: string, item: Item) =>
+      setBoxes((state) => addItem(state, id, item)),
+    removeItem: (id: string, item: Item) =>
+      setBoxes((state) => removeItem(state, id, item)),
   };
 
   return (
