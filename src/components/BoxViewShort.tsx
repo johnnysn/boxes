@@ -9,9 +9,9 @@ import { Item } from '../models/item.model';
 import plus from '../assets/plus.svg';
 import deleteIcon from '../assets/delete.svg';
 
-type Props = { box: Box };
+type Props = { box: Box, onRemove: () => void };
 
-export default function BoxViewShort({ box }: Props) {
+export default function BoxViewShort({ box, onRemove }: Props) {
   const [toggleNew, setToggleNew] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const { addItem, removeItem } = useContext<BoxesContextType>(BoxesContext);
@@ -70,7 +70,7 @@ export default function BoxViewShort({ box }: Props) {
           <ItemViewShort
             key={index}
             item={item}
-            onRemoveItem={removeItemHandler}
+            onRemoveItem={() => removeItemHandler(item)}
           />
         ))}
       </div>
@@ -80,7 +80,7 @@ export default function BoxViewShort({ box }: Props) {
       >
         <button
           className="flex items-center justify-end"
-          onClick={addItemHandler}
+          onClick={onRemove}
         >
           <img src={deleteIcon} alt="Delete box" width="16px" />
         </button>

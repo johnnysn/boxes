@@ -1,10 +1,10 @@
-import React, { ReactNode, useState } from "react";
-import BoxesContextType, { initialBoxesContext } from "./boxes-context.type";
-import { Box, IBox } from "../models/box.model";
-import { Item } from "../models/item.model";
+import React, { ReactNode, useState } from 'react';
+import BoxesContextType, { initialBoxesContext } from './boxes-context.type';
+import { Box, IBox } from '../models/box.model';
+import { Item } from '../models/item.model';
 
 const addBox = (boxes: Box[], boxData: IBox): Box[] => {
-  const box = new Box("id", boxData.label, boxData.color, boxData.description);
+  const box = new Box('id', boxData.label, boxData.color, boxData.description);
 
   return [...boxes, box];
 };
@@ -29,7 +29,8 @@ const removeBox = (boxes: Box[], id: string): Box[] => {
   let box = boxes.find((b) => b.id === id);
 
   if (box) {
-    return boxes.filter((b) => b.id !== id);
+    const new_boxes = boxes.filter((b) => b.id !== id);
+    return [...new_boxes];
   }
 
   return boxes;
@@ -62,8 +63,8 @@ export const BoxesContext =
 
 const BoxesProvider = ({ children }: { children: ReactNode }) => {
   const [boxes, setBoxes] = useState<Box[]>([
-    new Box("Id", "Caixa registradora", "red", "", [{ label: "Canetas" }]),
-    new Box("Id2", "Caixa de sapato", "yellow", "", [{ label: "Cabos" }]),
+    new Box('Id', 'Caixa registradora', 'red', '', [{ label: 'Canetas' }]),
+    new Box('Id2', 'Caixa de sapato', 'yellow', '', [{ label: 'Cabos' }]),
   ]);
 
   const contextValue: BoxesContextType = {
