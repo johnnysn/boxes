@@ -1,10 +1,13 @@
 import { useContext, useEffect, useRef, useState } from 'react';
+import styles from './BoxViewShort.module.css';
 import { Box } from '../models/box.model';
 import ItemViewShort from './ItemViewShort';
 import NewItemInput from './NewItemInput';
 import BoxesContextType from '../context/boxes-context.type';
 import { BoxesContext } from '../context/boxes-context';
 import { Item } from '../models/item.model';
+import plus from '../assets/plus.svg';
+import deleteIcon from '../assets/delete.svg';
 
 type Props = { box: Box };
 
@@ -38,21 +41,23 @@ export default function BoxViewShort({ box }: Props) {
 
   return (
     <div
-      className={`py-2 px-4 text-gray-700 font-medium bg-${box.color}-400 border-${box.color}-700 hover:bg-${box.color}-300 transition-color duration-300 border-2 rounded min-h-[100px] max-w-[280px] flex flex-col`}
+      className={`text-gray-700 font-medium bg-${box.color}-400 border-${box.color}-700 hover:bg-${box.color}-300 transition-color duration-300 border-2 rounded min-h-[100px] max-w-[280px] ${styles['box']}`}
     >
-      <div className="flex flex-row justify-between items-center gap-2 mb-2">
+      <div
+        className={`flex flex-row justify-between items-center gap-2 bg-${box.color}-700 text-white ${styles['box__top']}`}
+      >
         <div>{box.label}</div>
         {!toggleNew && (
           <button
-            className="text-xl rounded-full h-[32px] w-[32px]"
+            className="flex items-center justify-end"
             onClick={addItemHandler}
           >
-            +
+            <img src={plus} alt="Add item" width="12px" />
           </button>
         )}
       </div>
 
-      <div className="flex flex-wrap gap-2">
+      <div className={`flex flex-wrap gap-2 ${styles['box__body']}`}>
         {toggleNew && (
           <NewItemInput
             onAdded={addedItemHandler}
@@ -62,8 +67,23 @@ export default function BoxViewShort({ box }: Props) {
         )}
 
         {box.items.map((item, index) => (
-          <ItemViewShort key={index} item={item} onRemoveItem={removeItemHandler} />
+          <ItemViewShort
+            key={index}
+            item={item}
+            onRemoveItem={removeItemHandler}
+          />
         ))}
+      </div>
+
+      <div
+        className={`flex justify-end items-center gap-2 bg-${box.color}-700 text-white ${styles['box__bottom']}`}
+      >
+        <button
+          className="flex items-center justify-end"
+          onClick={addItemHandler}
+        >
+          <img src={deleteIcon} alt="Delete box" width="16px" />
+        </button>
       </div>
     </div>
   );

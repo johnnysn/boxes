@@ -1,0 +1,16 @@
+.box {
+  display: grid;
+  grid-template-rows: 32px auto 24px;
+}
+
+.box__top {
+  padding: 8px 4px;
+}
+
+.box__body {
+  padding: 16px 4px;
+}
+
+.box__bottom {
+  padding: 2px 4px;
+}
