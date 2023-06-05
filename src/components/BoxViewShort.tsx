@@ -41,7 +41,7 @@ export default function BoxViewShort({ box, onRemove }: Props) {
 
   return (
     <div
-      className={`text-gray-700 font-medium bg-${box.color}-400 border-${box.color}-700 hover:bg-${box.color}-300 transition-color duration-300 border-2 rounded min-h-[100px] max-w-[280px] ${styles['box']}`}
+      className={`text-gray-700 font-medium bg-${box.color}-400 border-${box.color}-700 hover:bg-${box.color}-300 transition-color duration-300 border-2 rounded min-h-[100px] min-w-[150px] max-w-[280px] ${styles['box']}`}
     >
       <div
         className={`flex flex-row justify-between items-center gap-2 bg-${box.color}-700 text-white ${styles['box__top']}`}
