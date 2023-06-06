@@ -63,8 +63,15 @@ export const BoxesContext =
 
 const BoxesProvider = ({ children }: { children: ReactNode }) => {
   const [boxes, setBoxes] = useState<Box[]>([
-    new Box('Id', 'Caixa registradora', 'red', '', [{ label: 'Canetas' }]),
-    new Box('Id2', 'Caixa de sapato', 'yellow', '', [{ label: 'Cabos' }]),
+    new Box('Id', 'Caixa de TV LG', 'red', '', [
+      { label: 'Suporte de tv' },
+      { label: 'Manuais diversos' },
+    ]),
+    new Box('Id2', 'Caixa de sapato', 'yellow', '', [
+      { label: 'Cabos' },
+      { label: 'Pilhas' },
+      { label: 'Componentes eletrônicos' },
+    ]),
   ]);
 
   const contextValue: BoxesContextType = {

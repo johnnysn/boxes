@@ -8,10 +8,12 @@ export default function App() {
       <header>
         <Navbar />
       </header>
-      <main className='px-2 sm:px-4 lg:px-6 py-4'>
-        <BoxesProvider>
-          <Outlet />
-        </BoxesProvider>
+      <main className="px-2 sm:px-4 lg:px-6 py-4 flex justify-center">
+        <div className="w-full max-w-xl">
+          <BoxesProvider>
+            <Outlet />
+          </BoxesProvider>
+        </div>
       </main>
     </>
   );
