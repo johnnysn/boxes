@@ -5,15 +5,17 @@ import { useState, useContext, useEffect } from 'react';
 import BoxesContextType from '../context/boxes-context.type';
 import { BoxesContext } from '../context/boxes-context';
 import Modal from '../components/UI/Modal';
-import NewBox from '../components/NewBox';
+import BoxEdit from '../components/BoxEdit';
 import { IBox } from '../models/box.model';
 
 type Props = {};
 
 export default function MainPage({}: Props) {
-  const { boxes, addBox } = useContext<BoxesContextType>(BoxesContext);
+  const { boxes, addBox, updateBox } =
+    useContext<BoxesContextType>(BoxesContext);
   const [filteredBoxes, setFilteredBoxes] = useState(boxes);
-  const [isAdding, setIsAdding] = useState(false);
+  const [idEditing, setIsEditing] = useState(false);
+  const [boxToEdit, setBoxToEdit] = useState<IBox | null>(null);
 
   useEffect(() => {
     setFilteredBoxes(boxes);
@@ -27,24 +29,44 @@ export default function MainPage({}: Props) {
     );
   };
 
-  const createBoxHandler = (data: IBox) => {
-    addBox(data);
+  const submitBoxHandler = (data: IBox) => {
+    if (!data.id) addBox(data);
+    else updateBox(data.id, data);
+  };
+
+  const boxEditHandler = (data: IBox) => {
+    setIsEditing(true);
+    setBoxToEdit(data);
+  };
+
+  const boxAddHandler = () => {
+    setIsEditing(true);
+    setBoxToEdit(null);
+  };
+
+  const cancelEditing = () => {
+    setIsEditing(false);
+    setBoxToEdit(null);
   };
 
   return (
     <>
-      {isAdding && (
-        <Modal onCancel={() => setIsAdding(false)}>
-          <NewBox onSubmit={createBoxHandler} onClose={() => setIsAdding(false)} />
+      {idEditing && (
+        <Modal onCancel={cancelEditing}>
+          <BoxEdit
+            onSubmit={submitBoxHandler}
+            boxId={boxToEdit?.id}
+            onClose={cancelEditing}
+          />
         </Modal>
       )}
 
       <div className="flex flex-col items-center gap-6">
         <div className="flex flex-col lg:flex-row gap-4 items-center">
           <SearchBox searchHandler={searchHandler} />
-          <AddBoxButton onClick={() => setIsAdding(true)} />
+          <AddBoxButton onClick={boxAddHandler} />
         </div>
-        <Boxes boxes={filteredBoxes} />
+        <Boxes boxes={filteredBoxes} onEdit={boxEditHandler} />
       </div>
     </>
   );

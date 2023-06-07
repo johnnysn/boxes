@@ -7,6 +7,7 @@ type Props = {
   placeholder?: string;
   required?: boolean;
   maxLength?: number;
+  defaultValue?: string;
 };
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, Props>( (props: Props, ref) => {
@@ -43,6 +44,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, Props>( (props: Props, re
         onChange={changeHandler}
         onBlur={blurHandler}
         onInvalid={() => setHasError(true)}
+        defaultValue={props.defaultValue}
       ></textarea>
     </div>
   );

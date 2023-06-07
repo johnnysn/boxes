@@ -4,7 +4,12 @@ import { Box, IBox } from '../models/box.model';
 import { Item } from '../models/item.model';
 
 const addBox = (boxes: Box[], boxData: IBox): Box[] => {
-  const box = new Box('id', boxData.label, boxData.color, boxData.description);
+  const box = new Box(
+    (Math.random() + 1).toString(36).substring(7),
+    boxData.label,
+    boxData.color,
+    boxData.description
+  );
 
   return [...boxes, box];
 };
@@ -58,6 +63,10 @@ const removeItem = (boxes: Box[], id: string, item: Item): Box[] => {
   return boxes;
 };
 
+const byId = (boxes: Box[], id: string): Box | null => {
+  return boxes.find((b) => b.id === id) ?? null;
+};
+
 export const BoxesContext =
   React.createContext<BoxesContextType>(initialBoxesContext);
 
@@ -84,6 +93,7 @@ const BoxesProvider = ({ children }: { children: ReactNode }) => {
       setBoxes((state) => addItem(state, id, item)),
     removeItem: (id: string, item: Item) =>
       setBoxes((state) => removeItem(state, id, item)),
+    getById: (id: string) => byId(boxes, id),
   };
 
   return (

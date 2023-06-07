@@ -8,6 +8,7 @@ export type BoxesContextType = {
   removeBox: (id: string) => void,
   addItem: (id: string, item: Item) => void,
   removeItem: (id: string, item: Item) => void,
+  getById: (id: string) => Box | null
 };
 
 export default BoxesContextType;
@@ -18,5 +19,6 @@ export const initialBoxesContext = {
   updateBox: (id: string, box: IBox) => {},
   removeBox: (id: string) => {},
   addItem: (id: string, item: Item) => {},
-  removeItem: (id: string, item: Item) => {}
+  removeItem: (id: string, item: Item) => {},
+  getById: (id: string) => { return null; }
 };

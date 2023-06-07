@@ -1,15 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import selectableColors from '../../constants/selectable-colors';
 
-type Props = { onSelectColor: (color: string) => void };
+type Props = { onSelectColor: (color: string) => void, selectedColor?: string };
 
-export default function ColorPicker({ onSelectColor }: Props) {
+export default function ColorPicker({ onSelectColor, selectedColor }: Props) {
   const [color, setColor] = useState('red');
 
   const colorClickHandler = (c: string) => {
     setColor(c);
     onSelectColor(c);
   };
+
+  useEffect(() => {
+    if (selectedColor) {
+      setColor(selectedColor);
+    }
+  }, [selectedColor]);
 
   return (
     <div className="mb-4">

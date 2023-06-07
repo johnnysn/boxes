@@ -7,6 +7,7 @@ type Props = {
   type?: string;
   required?: boolean;
   maxLength?: number;
+  defaultValue?: string;
 };
 
 const Input = React.forwardRef<HTMLInputElement, Props>( (props: Props, ref) => {
@@ -43,6 +44,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>( (props: Props, ref) => 
         onChange={changeHandler}
         onBlur={blurHandler}
         onInvalid={() => setHasError(true)}
+        defaultValue={props.defaultValue}
       />
     </div>
   );
