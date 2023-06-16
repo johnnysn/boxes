@@ -7,14 +7,17 @@ import { BoxesContext } from '../context/boxes-context';
 import Modal from '../components/UI/Modal';
 import BoxEdit from '../components/BoxEdit';
 import { IBox } from '../models/box.model';
+import Confirm from '../components/UI/Confirm';
 
 type Props = {};
 
 export default function MainPage({}: Props) {
-  const { boxes, addBox, updateBox } =
+  const { boxes, addBox, updateBox, removeBox } =
     useContext<BoxesContextType>(BoxesContext);
   const [filteredBoxes, setFilteredBoxes] = useState(boxes);
-  const [idEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [isRemoving, setIsRemoving] = useState(false);
+  const [boxIdToRemove, setBoxIdToRemove] = useState('');
   const [boxToEdit, setBoxToEdit] = useState<IBox | null>(null);
 
   useEffect(() => {
@@ -49,9 +52,25 @@ export default function MainPage({}: Props) {
     setBoxToEdit(null);
   };
 
+  const startRemoving = (boxId: string) => {
+    setIsRemoving(true);
+    setBoxIdToRemove(boxId);
+  };
+
+  const cancelRemoving = () => {
+    setIsRemoving(false);
+    setBoxIdToRemove('');
+  };
+
+  const confirmRemoving = () => {
+    setIsRemoving(false);
+    removeBox(boxIdToRemove);
+    setBoxIdToRemove('');
+  };
+
   return (
     <>
-      {idEditing && (
+      {isEditing && (
         <Modal onCancel={cancelEditing}>
           <BoxEdit
             onSubmit={submitBoxHandler}
@@ -61,12 +80,16 @@ export default function MainPage({}: Props) {
         </Modal>
       )}
 
+      {isRemoving && (
+        <Confirm text='Do you really wanna drop this beaultiful box?' onCancel={cancelRemoving} onConfirm={confirmRemoving} />
+      )}
+
       <div className="flex flex-col items-center gap-6">
         <div className="flex flex-col lg:flex-row gap-4 items-center">
           <SearchBox searchHandler={searchHandler} />
           <AddBoxButton onClick={boxAddHandler} />
         </div>
-        <Boxes boxes={filteredBoxes} onEdit={boxEditHandler} />
+        <Boxes boxes={filteredBoxes} onEdit={boxEditHandler} onRemove={startRemoving} />
       </div>
     </>
   );
