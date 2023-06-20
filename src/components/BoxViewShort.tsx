@@ -61,7 +61,7 @@ export default function BoxViewShort({ box, onRemove, onEdit }: Props) {
         </div>
       </div>
 
-      <div className={`flex flex-wrap gap-2 ${styles['box__body']}`}>
+      <div className={`flex flex-wrap gap-2 ${styles['box__body']} max-h-[180px] overflow-y-scroll`}>
         {toggleNew && (
           <NewItemInput
             onAdded={addedItemHandler}

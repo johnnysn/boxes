@@ -16,3 +16,22 @@ body {
 a {
   @apply font-medium border-transparent transition ease-in-out duration-300 hover:border-b-2 hover:border-b-primary;
 }
+
+* {
+  scrollbar-width: 6px;
+  scrollbar-color: rgb(120,120,120,0.5) transparent;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(120,120,120,0.5);
+  border-radius: 20px;
+}

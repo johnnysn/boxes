@@ -5,7 +5,7 @@ type Props = { boxes: Box[]; onEdit: (boxData: IBox) => void; onRemove: (boxId: 
 
 export default function Boxes({ boxes, onEdit, onRemove }: Props) {
   return (
-    <div className="flex flex-row flex-wrap md:justify-start justify-center gap-4 max-w-screen-lg">
+    <div className="flex flex-row flex-wrap items-start md:justify-start justify-center gap-4">
       {boxes.map((box, index) => (
         <BoxViewShort
           key={index}

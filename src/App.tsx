@@ -9,7 +9,7 @@ export default function App() {
         <Navbar />
       </header>
       <main className="px-2 sm:px-4 lg:px-6 py-4 flex justify-center">
-        <div className="w-full max-w-xl">
+        <div className="w-full max-w-screen-lg">
           <BoxesProvider>
             <Outlet />
           </BoxesProvider>
