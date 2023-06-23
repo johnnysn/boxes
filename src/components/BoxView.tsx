@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import styles from './BoxViewShort.module.css';
+import styles from './BoxView.module.css';
 import { Box } from '../models/box.model';
 import ItemViewShort from './ItemViewShort';
 import NewItemInput from './NewItemInput';
@@ -10,9 +10,15 @@ import plus from '../assets/plus.svg';
 import deleteIcon from '../assets/delete.svg';
 import editIcon from '../assets/edit.svg';
 
-type Props = { box: Box; onRemove: () => void; onEdit: () => void };
+type Props = {
+  box: Box;
+  full?: boolean;
+  onRemove?: () => void;
+  onEdit: () => void;
+  onSelect?: () => void;
+};
 
-export default function BoxViewShort({ box, onRemove, onEdit }: Props) {
+export default function BoxView({ box, full, onRemove, onSelect, onEdit }: Props) {
   const [toggleNew, setToggleNew] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const { addItem, removeItem } = useContext<BoxesContextType>(BoxesContext);
@@ -42,12 +48,12 @@ export default function BoxViewShort({ box, onRemove, onEdit }: Props) {
 
   return (
     <div
-      className={`text-gray-700 font-medium bg-${box.color}-400 border-${box.color}-700 hover:bg-${box.color}-300 transition-color duration-300 border-2 rounded min-h-[100px] min-w-[150px] max-w-[280px] ${styles['box']}`}
+      className={`text-gray-700 font-medium bg-${box.color}-400 border-${box.color}-700 hover:bg-${box.color}-300 transition-color duration-300 border-2 rounded ${styles['box']}`}
     >
       <div
         className={`flex flex-row justify-between items-center bg-${box.color}-700 text-white ${styles['box__top']}`}
       >
-        <div>{box.label}</div>
+        <div className="cursor-pointer" onClick={onSelect}>{box.label}</div>
 
         <div className="flex justify-end items-center gap-2">
           <button onClick={onEdit}>
@@ -61,7 +67,11 @@ export default function BoxViewShort({ box, onRemove, onEdit }: Props) {
         </div>
       </div>
 
-      <div className={`flex flex-wrap gap-2 ${styles['box__body']} max-h-[180px] overflow-y-scroll`}>
+      <div
+        className={`flex flex-wrap gap-2 ${styles['box__body']} ${
+          full === true ? 'max-h-[400px]' : 'max-h-[180px]'
+        }  overflow-y-scroll`}
+      >
         {toggleNew && (
           <NewItemInput
             onAdded={addedItemHandler}

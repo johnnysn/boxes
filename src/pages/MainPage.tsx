@@ -8,6 +8,7 @@ import Modal from '../components/UI/Modal';
 import BoxEdit from '../components/BoxEdit';
 import { IBox } from '../models/box.model';
 import Confirm from '../components/UI/Confirm';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 type Props = {};
 
@@ -19,10 +20,22 @@ export default function MainPage({}: Props) {
   const [isRemoving, setIsRemoving] = useState(false);
   const [boxIdToRemove, setBoxIdToRemove] = useState('');
   const [boxToEdit, setBoxToEdit] = useState<IBox | null>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setFilteredBoxes(boxes);
   }, [boxes]);
+
+  useEffect(() => {
+    const toDeleteId = searchParams.get('delete');
+    if (toDeleteId) {
+      setIsRemoving(true);
+      setBoxIdToRemove(toDeleteId);
+      searchParams.delete('delete');
+      setSearchParams(searchParams);
+    }
+  }, [searchParams]);
 
   const searchHandler = (key: string) => {
     setFilteredBoxes(
@@ -68,20 +81,28 @@ export default function MainPage({}: Props) {
     setBoxIdToRemove('');
   };
 
+  const boxSelectHandler = (boxId: string) => {
+    navigate('/box/' + boxId);
+  };
+
   return (
     <>
       {isEditing && (
         <Modal onCancel={cancelEditing}>
           <BoxEdit
             onSubmit={submitBoxHandler}
-            boxId={boxToEdit?.id}
+            boxDataIn={boxToEdit}
             onClose={cancelEditing}
           />
         </Modal>
       )}
 
       {isRemoving && (
-        <Confirm text='Do you really wanna drop this beaultiful box?' onCancel={cancelRemoving} onConfirm={confirmRemoving} />
+        <Confirm
+          text="Do you really wanna drop this beaultiful box?"
+          onCancel={cancelRemoving}
+          onConfirm={confirmRemoving}
+        />
       )}
 
       <div className="flex flex-col items-center gap-6">
@@ -89,7 +110,12 @@ export default function MainPage({}: Props) {
           <SearchBox searchHandler={searchHandler} />
           <AddBoxButton onClick={boxAddHandler} />
         </div>
-        <Boxes boxes={filteredBoxes} onEdit={boxEditHandler} onRemove={startRemoving} />
+        <Boxes
+          boxes={filteredBoxes}
+          onEdit={boxEditHandler}
+          onRemove={startRemoving}
+          onSelect={boxSelectHandler}
+        />
       </div>
     </>
   );
