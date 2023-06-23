@@ -24,11 +24,16 @@ export default function BoxPage({}: Props) {
   };
 
   return (
-    <div className="py-2 px-2">
+    <div className="py-2 px-2 flex flex-col gap-2">
+      <div>
+        <h2 className="font-bold text-lg text-gray-700">{ box?.label }</h2>
+
+        <p className="text-gray-700">{ box?.description }</p>
+      </div>
 
       <BoxView box={box!} onEdit={boxEditHandler} onRemove={boxRemoveHandler} full={true} />
 
-      <div className="flex justify-center w-full mt-4">
+      <div className="flex justify-center w-full mt-2">
         <ReturnButton />
       </div>
     </div>
