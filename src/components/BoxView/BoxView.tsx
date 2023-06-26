@@ -1,7 +1,6 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import styles from './BoxView.module.css';
 import { Box } from '../../models/box.model';
-import ItemViewShort from './ItemViewShort';
 import NewItemInput from './NewItemInput';
 import BoxesContextType from '../../context/boxes-context.type';
 import { BoxesContext } from '../../context/boxes-context';
@@ -9,6 +8,7 @@ import { Item } from '../../models/item.model';
 import plus from '../../assets/plus.svg';
 import deleteIcon from '../../assets/delete.svg';
 import editIcon from '../../assets/edit.svg';
+import BoxViewContent from './BoxViewContent';
 
 type Props = {
   box: Box;
@@ -89,29 +89,13 @@ export default function BoxView({
           />
         )}
 
-        <div
-          className={`flex flex-wrap gap-2 ${styles['box__body']} ${
-            full === true ? 'max-h-[400px]' : 'max-h-[180px]'
-          }  overflow-y-scroll`}
-        >
-          {box.items.map((item, index) => (
-            <ItemViewShort
-              key={index}
-              item={item}
-              onRemoveItem={() => removeItemHandler(item)}
-            />
-          ))}
-
-          {box.boxes.map((subbox, index) => (
-            <div key={index} className="max-w-[300px]">
-              <BoxView
-                box={subbox}
-                onSelect={() => onSelect && onSelect(subbox.id)}
-                onRemove={() => onRemove && onRemove(subbox.id)}
-              />
-            </div>
-          ))}
-        </div>
+        <BoxViewContent
+          box={box}
+          onRemoveItem={removeItemHandler}
+          onSelect={onSelect}
+          onRemove={onRemove}
+          full={full}
+        />
       </div>
 
       <div
