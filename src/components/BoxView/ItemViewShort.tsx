@@ -1,5 +1,5 @@
-import { Item } from '../models/item.model';
-import close from '../assets/close.svg';
+import { Item } from '../../models/item.model';
+import close from '../../assets/close.svg';
 
 type Props = { item: Item, onRemoveItem: () => void };
 

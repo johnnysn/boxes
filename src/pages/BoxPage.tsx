@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import BoxView from '../components/BoxView';
+import BoxView from '../components/BoxView/BoxView';
 import BoxesContextType from '../context/boxes-context.type';
 import { BoxesContext } from '../context/boxes-context';
 import { useNavigate, useParams } from 'react-router-dom';

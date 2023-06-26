@@ -27,7 +27,7 @@ const NewItemInput = React.forwardRef((props: Props, ref) => {
   };
 
   return (
-    <div className="flex items-center bg-orange-100 rounded-lg py-1 px-1 hover:bg-orange-50 focus-within:bg-orange-50 transition-colors duration-300">
+    <div className="flex items-center bg-orange-100 rounded-lg py-1 px-1 hover:bg-orange-50 focus-within:bg-orange-50 transition-colors duration-300 mt-2 max-w-[240px]">
       <input
         className="appearance-none bg-transparent border-none w-full text-gray-700 text-sm font-medium font-sans px-1 leading-tight focus:outline-none"
         type="text"

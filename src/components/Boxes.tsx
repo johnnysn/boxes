@@ -1,5 +1,5 @@
 import { Box, IBox } from '../models/box.model';
-import BoxView from './BoxView';
+import BoxView from './BoxView/BoxView';
 
 type Props = {
   boxes: Box[];
