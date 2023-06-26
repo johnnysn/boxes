@@ -3,6 +3,7 @@ import { Item } from "./item.model";
 export class Box {
   private _items: Item[] = [];
   private _parent: Box | null = null;
+  private _boxes: Box[] = [];
 
   constructor(
     private _id: string,
@@ -36,12 +37,36 @@ export class Box {
     return this._description;
   }
 
+  public get boxes() {
+    return this._boxes;
+  }
+
+  public get parent(): Box | null {
+    return this._parent;
+  }
+
+  public set parent(parent: Box) {
+    this._parent = parent;
+  }
+
   public addItem(item: Item) {
     this._items = [item, ...this._items];
   }
 
   public removeItem(item: Item) {
-    this._items = this.items.filter(i => i.label.trim() !== item.label.trim());
+    this._items = this._items.filter(i => i.label.trim() !== item.label.trim());
+  }
+
+  public addBox(box: Box) {
+    const index = this._boxes.findIndex(b => b.id === box.id);
+    if (index > -1) return;
+    this._boxes.push(box);
+    box._parent = this;
+  }
+
+  public removeBox(box: Box) {
+    this._boxes = this._boxes.filter(b => b.id !== box.id);
+    box._parent = null;
   }
 }
 
@@ -51,5 +76,6 @@ export interface IBox {
   color: string;
   description?: string;
   items?: Item[];
-  parent?: Box | null;
+  parent?: IBox | null;
+  boxes?: IBox[];
 }

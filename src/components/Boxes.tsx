@@ -20,8 +20,8 @@ export default function Boxes({ boxes, onEdit, onRemove, onSelect }: Props) {
           <BoxView
             box={box}
             onEdit={() => onEdit(box)}
-            onRemove={() => onRemove(box.id)}
-            onSelect={() => onSelect(box.id)}
+            onRemove={onRemove}
+            onSelect={onSelect}
           />
         </div>
       ))}

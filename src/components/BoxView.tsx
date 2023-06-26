@@ -13,12 +13,18 @@ import editIcon from '../assets/edit.svg';
 type Props = {
   box: Box;
   full?: boolean;
-  onRemove?: () => void;
-  onEdit: () => void;
-  onSelect?: () => void;
+  onRemove?: (boxId: string) => void;
+  onEdit?: () => void;
+  onSelect?: (boxId: string) => void;
 };
 
-export default function BoxView({ box, full, onRemove, onSelect, onEdit }: Props) {
+export default function BoxView({
+  box,
+  full,
+  onRemove,
+  onSelect,
+  onEdit,
+}: Props) {
   const [toggleNew, setToggleNew] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const { addItem, removeItem } = useContext<BoxesContextType>(BoxesContext);
@@ -53,12 +59,19 @@ export default function BoxView({ box, full, onRemove, onSelect, onEdit }: Props
       <div
         className={`flex flex-row justify-between items-center bg-${box.color}-700 text-white ${styles['box__top']}`}
       >
-        <div className="cursor-pointer" onClick={onSelect}>{box.label}</div>
+        <div
+          className="cursor-pointer mr-2"
+          onClick={() => onSelect && onSelect(box.id)}
+        >
+          {box.label}
+        </div>
 
         <div className="flex justify-end items-center gap-2">
-          <button onClick={onEdit}>
-            <img src={editIcon} alt="Edit box" width="19px" />
-          </button>
+          {onEdit && (
+            <button onClick={onEdit}>
+              <img src={editIcon} alt="Edit box" width="19px" />
+            </button>
+          )}
           {!toggleNew && (
             <button onClick={addItemHandler} disabled={toggleNew}>
               <img src={plus} alt="Add item" width="12px" />
@@ -87,12 +100,24 @@ export default function BoxView({ box, full, onRemove, onSelect, onEdit }: Props
             onRemoveItem={() => removeItemHandler(item)}
           />
         ))}
+
+        {box.boxes.map((subbox, index) => (
+          <BoxView
+            key={index}
+            box={subbox}
+            onSelect={() => onSelect && onSelect(subbox.id)}
+            onRemove={() => onRemove && onRemove(subbox.id)}
+          />
+        ))}
       </div>
 
       <div
         className={`flex justify-end items-center gap-2 bg-${box.color}-700 text-white ${styles['box__bottom']}`}
       >
-        <button className="flex items-center justify-end" onClick={onRemove}>
+        <button
+          className="flex items-center justify-end"
+          onClick={() => onRemove && onRemove(box.id)}
+        >
           <img src={deleteIcon} alt="Delete box" width="16px" />
         </button>
       </div>

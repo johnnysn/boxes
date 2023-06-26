@@ -24,7 +24,7 @@ export default function MainPage({}: Props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setFilteredBoxes(boxes);
+    setFilteredBoxes(boxes.filter((b) => !b.parent));
   }, [boxes]);
 
   useEffect(() => {
@@ -40,7 +40,9 @@ export default function MainPage({}: Props) {
   const searchHandler = (key: string) => {
     setFilteredBoxes(
       boxes.filter(
-        (b) => b.label.toLowerCase().indexOf(key.trim().toLowerCase()) > -1
+        (b) =>
+          !b.parent &&
+          b.label.toLowerCase().indexOf(key.trim().toLowerCase()) > -1
       )
     );
   };

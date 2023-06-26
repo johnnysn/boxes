@@ -34,6 +34,10 @@ const removeBox = (boxes: Box[], id: string): Box[] => {
   let box = boxes.find((b) => b.id === id);
 
   if (box) {
+    if (box.parent) {
+      box.parent.removeBox(box);
+    }
+
     const new_boxes = boxes.filter((b) => b.id !== id);
     return [...new_boxes];
   }
@@ -67,6 +71,28 @@ const byId = (boxes: Box[], id: string): Box | null => {
   return boxes.find((b) => b.id === id) ?? null;
 };
 
+const addBoxToBox = (boxes: Box[], id: string, box: IBox): Box[] => {
+  const parentBox = boxes.find(b => b.id === id);
+  if (!parentBox) return boxes;
+
+  const newBoxes = [...boxes];
+
+  let realBox = boxes.find(b => b.id === box.id);
+  if (!realBox) {
+    realBox = new Box(
+      (Math.random() + 1).toString(36).substring(7),
+      box.label,
+      box.color,
+      box.description
+    );
+    newBoxes.push(realBox);
+  } 
+  realBox.parent = parentBox;
+  parentBox.addBox(realBox);
+
+  return newBoxes;
+}
+
 export const BoxesContext =
   React.createContext<BoxesContextType>(initialBoxesContext);
 
@@ -94,6 +120,7 @@ const BoxesProvider = ({ children }: { children: ReactNode }) => {
     removeItem: (id: string, item: Item) =>
       setBoxes((state) => removeItem(state, id, item)),
     getById: (id: string) => byId(boxes, id),
+    addBoxToBox: (id: string, box: IBox) => setBoxes((state) => addBoxToBox(state, id, box))
   };
 
   return (
