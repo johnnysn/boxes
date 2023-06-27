@@ -1,7 +1,7 @@
 import { Box } from '../../models/box.model';
 import { Item } from '../../models/item.model';
 import BoxView from './BoxView';
-import styles from './BoxViewContent.module.css';
+import styles from './BoxView.module.css';
 import ItemViewShort from './ItemViewShort';
 
 type Props = {
