@@ -4,7 +4,7 @@ import BoxesContextType from '../context/boxes-context.type';
 import { BoxesContext } from '../context/boxes-context';
 import { useNavigate, useParams } from 'react-router-dom';
 import ReturnButton from '../components/UI/ReturnButton';
-import AddBoxButton from '../components/AddBoxButton';
+import AddBoxButton from '../components/UI/AddBoxButton';
 import Modal from '../components/UI/Modal';
 import BoxEdit from '../components/BoxEdit';
 import { IBox } from '../models/box.model';

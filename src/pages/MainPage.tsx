@@ -1,6 +1,6 @@
 import Boxes from '../components/Boxes';
 import SearchBox from '../components/SearchBox';
-import AddBoxButton from '../components/AddBoxButton';
+import AddBoxButton from '../components/UI/AddBoxButton';
 import { useState, useContext, useEffect } from 'react';
 import BoxesContextType from '../context/boxes-context.type';
 import { BoxesContext } from '../context/boxes-context';
