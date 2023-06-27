@@ -7,8 +7,9 @@ import ReturnButton from '../components/UI/ReturnButton';
 import AddBoxButton from '../components/UI/AddBoxButton';
 import Modal from '../components/UI/Modal';
 import BoxEdit from '../components/BoxEdit';
-import { IBox } from '../models/box.model';
+import { Box, IBox } from '../models/box.model';
 import Confirm from '../components/UI/Confirm';
+import BoxParents from '../components/BoxParents';
 
 type Props = {};
 
@@ -19,26 +20,25 @@ export default function BoxPage({}: Props) {
   const [isAdding, setIsAdding] = useState(false);
   const [removingBoxId, setRemovingBoxId] = useState<string | null>(null);
 
-  const box = ctx.getById(id!);
+  const box: Box = ctx.getById(id!)!;
 
   const boxEditHandler = () => {
     navigate('edit');
   };
 
   const boxSelectHandler = (boxId: string) => {
-    if (boxId != box?.id) {
+    if (boxId != box.id) {
       navigate('/box/' + boxId);
     }
-  }
+  };
 
   const boxRemoveHandler = (boxId: string) => {
-    if (boxId === box?.id) {
+    if (boxId === box.id) {
       navigate({
         pathname: '/',
         search: '?delete=' + boxId,
       });
     } else {
-      //Remove inner box
       setRemovingBoxId(boxId);
     }
   };
@@ -52,7 +52,7 @@ export default function BoxPage({}: Props) {
   };
 
   const submitBoxHandler = (data: IBox) => {
-    ctx.addBoxToBox(box?.id!, data);
+    ctx.addBoxToBox(box.id!, data);
   };
 
   const cancelRemoving = () => {
@@ -62,7 +62,7 @@ export default function BoxPage({}: Props) {
   const confirmRemoving = () => {
     ctx.removeBox(removingBoxId!);
     setRemovingBoxId(null);
-  }
+  };
 
   return (
     <div className="py-2 px-2 flex flex-col gap-2">
@@ -81,22 +81,24 @@ export default function BoxPage({}: Props) {
       )}
 
       <div>
-        <h2 className="font-bold text-lg text-gray-700">{box?.label}</h2>
+        <h2 className="font-bold text-lg text-gray-700">{box.label}</h2>
 
-        <p className="text-gray-700">{box?.description}</p>
+        <p className="text-gray-700">{box.description}</p>
 
         <div className="mt-4 w-full flex justify-end">
           <AddBoxButton onClick={boxAddHandler} />
         </div>
       </div>
 
-      <BoxView
-        box={box!}
-        onEdit={boxEditHandler}
-        onRemove={boxRemoveHandler}
-        onSelect={boxSelectHandler}
-        full={true}
-      />
+      <BoxParents box={box}>
+        <BoxView
+          box={box}
+          onEdit={boxEditHandler}
+          onRemove={boxRemoveHandler}
+          onSelect={boxSelectHandler}
+          full={true}
+        />
+      </BoxParents>
 
       <div className="flex justify-center w-full mt-2">
         <ReturnButton />
