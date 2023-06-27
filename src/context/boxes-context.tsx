@@ -98,14 +98,16 @@ export const BoxesContext =
 
 const BoxesProvider = ({ children }: { children: ReactNode }) => {
   const [boxes, setBoxes] = useState<Box[]>([
-    new Box('Id', 'Caixa de TV LG', 'red', 'Description 1', [
-      { label: 'Suporte de tv' },
-      { label: 'Manuais diversos' },
+    new Box('idBox1', 'Philips TV box', 'red', 'A large TV box', [
+      { label: 'TV wall mount' },
+      { label: 'Old keyboard' },
+      { label: 'Two computer mices' },
+      { label: 'HDMI cable' },
     ]),
-    new Box('Id2', 'Caixa de sapato', 'yellow', 'Description 2', [
-      { label: 'Cabos' },
-      { label: 'Pilhas' },
-      { label: 'Componentes eletrônicos' },
+    new Box('Id2', 'Yeallow shoe box', 'yellow', 'A small box of shoes', [
+      { label: 'My favorite cds' },
+      { label: 'Digital watch' },
+      { label: 'External hard drive' },
     ]),
   ]);
 
