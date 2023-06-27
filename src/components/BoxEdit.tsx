@@ -5,13 +5,15 @@ import Textarea from './UI/Textarea';
 import { IBox } from '../models/box.model';
 import ColorPicker from './UI/ColorPicker';
 
+const DEFAULT_COLOR = 'red';
+
 type Props = {
   onSubmit: (data: IBox) => void,
   onClose: () => void,
   boxDataIn?: IBox | null
 };
 
-const emptyBoxData = { id: undefined, label: '', description: '', color: 'red' };
+const emptyBoxData = { id: undefined, label: '', description: '', color: DEFAULT_COLOR };
 
 export default function BoxEdit({ onSubmit, onClose, boxDataIn }: Props) {
   const labelRef = useRef<HTMLInputElement>(null);
@@ -22,6 +24,8 @@ export default function BoxEdit({ onSubmit, onClose, boxDataIn }: Props) {
   useEffect(() => {
     if (boxDataIn) {
       setColor(boxDataIn.color);
+    } else {
+      setColor(DEFAULT_COLOR);
     }
   },[boxDataIn]);
 
