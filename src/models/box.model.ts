@@ -45,7 +45,7 @@ export class Box {
     return this._parent;
   }
 
-  public set parent(parent: Box) {
+  public set parent(parent: Box | null) {
     this._parent = parent;
   }
 
