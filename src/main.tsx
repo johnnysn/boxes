@@ -36,7 +36,7 @@ const router = createBrowserRouter([
       },
     ]
   }
-]);
+], { basename: import.meta.env.DEV ? '/' : '/boxes/' });
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
