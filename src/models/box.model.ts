@@ -10,10 +10,14 @@ export class Box {
     private _label: string,
     private _color: string,
     private _description?: string,
-    _items?: Item[]
+    _items?: Item[],
+    _parent?: Box
   ) {
     if (_items) {
       this._items = _items;
+    }
+    if (_parent) {
+      this._parent = _parent;
     }
   }
 
